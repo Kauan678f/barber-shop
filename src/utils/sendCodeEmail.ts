@@ -1,4 +1,4 @@
-import nodemailer from "node";
+import nodemailer from "nodemailer";
 
 type SendCodeEmailInput = {
   to: string;               // email do destinatário
