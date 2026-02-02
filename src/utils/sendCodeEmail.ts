@@ -1,4 +1,8 @@
-import nodemailer from 'nodemailer';
+// import dns from 'dns';
+// dns.setDefaultResultOrder('ipv4first');
+
+
+import * as nodemailer from 'nodemailer';
 
 export async function sendCodeEmail(to: string, code: string) {
   const user = process.env.EMAIL_USER;

@@ -7,7 +7,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { VerificationcodeModule } from './verificationcode/verificationcode.module';
-import { VerificationcodeModule } from './verificationcode/verificationcode.module';
+// import { VerificationcodeModule } from './verificationcode/verificationcode.module';
 
 @Module({
   imports: [BarbershopModule, AuthModule, VerificationcodeModule],
