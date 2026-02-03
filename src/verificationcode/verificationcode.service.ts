@@ -1,47 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import  VerificationCodeModel  from './models/verificationCodeModel';
+import VerificationCodeModel from './models/verificationcodemodel';
 
 @Injectable()
 export class VerificationcodeService {
     constructor(private prismaService: PrismaService){}
 
-    async findEmail(email: string){
-        return await this.prismaService.verificationCode.findUnique({
-            where: {email: email},
-            select: {
-                email: true
-            }
-        })
-    }
-
-    async create(data: VerificationCodeModel){
-        return await this.prismaService.verificationCode.create({
-            data: data,
-            select: {
-                email: true
-            }
-        })
-    }
-
-    async delete(email: string){
-        return await this.prismaService.verificationCode.delete({
+    async emailExists(email: string): Promise<boolean> {
+        let user = await this.prismaService.verificationCode.findUnique({
             where: {email},
-            select: {
-                email: true
-            }
+        })
+
+        return !!user;
+    }
+
+    async create(data: VerificationCodeModel): Promise<void> {
+        console.log("DEBUG:", data.email)
+        await this.prismaService.verificationCode.create({
+            data
         })
     }
 
-    async update(email: string, code: string){
-        return await this.prismaService.verificationCode.update({
+    async delete(email: string): Promise<void> {
+        await this.prismaService.verificationCode.delete({
+            where: {email}
+        })
+    }
+
+    async update(email: string, code: string): Promise<void> {
+        await this.prismaService.verificationCode.update({
             where: {email},
             data: {
                 code: code
-            },
-            select: {
-                email: true
             }
         })
+    }
+
+    async isVerify(email: string, code: string): Promise<boolean>{
+        const objectEmail = await this.prismaService.verificationCode.findUnique({
+            where: {
+                email, 
+                code
+            }
+        });
+
+        return !!objectEmail;
     }
 }

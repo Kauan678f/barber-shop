@@ -1,5 +1,5 @@
-// import dns from 'dns';
-// dns.setDefaultResultOrder('ipv4first');
+import dns from 'dns';
+dns.setDefaultResultOrder('ipv4first');
 
 
 import * as nodemailer from 'nodemailer';
@@ -27,3 +27,4 @@ export async function sendCodeEmail(to: string, code: string) {
     html: `<h2>Seu código</h2><h1>${code}</h1>`,
   });
 }
+

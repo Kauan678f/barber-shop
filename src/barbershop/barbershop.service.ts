@@ -8,14 +8,14 @@ import BarberShopMODEL from './models/barbershop';
 export class BarbershopService {
     constructor(private prismaService: PrismaService){}
 
-    async findUserEmail(email: string): Promise<Object | null>{
+    async emailExists(email: string): Promise<boolean>{
         const user = await this.prismaService.barberShop.findUnique({
             where: {email}
         })
-        return user
+        return !!user
     }
 
-    async creteBarberShop(data: BarberShopMODEL){
+    async creteBarberShop(data: BarberShopMODEL): Promise<Object>{
         try {
             const barberShop = await this.prismaService.barberShop.create({
                 data: {
