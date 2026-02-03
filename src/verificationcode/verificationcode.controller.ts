@@ -21,7 +21,7 @@ export class VerificationcodeController {
 
 
         let emailExists: boolean = await this.verificationCodeService.emailExists(body.email)
-        let codeGeread = Math.random().toString(36).substring(2, 8).toUpperCase();
+        let codeGeread: string = Math.random().toString(36).substring(2, 8).toUpperCase();
 
         if (emailExists)
             this.verificationCodeService.update(body.email, codeGeread);

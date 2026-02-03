@@ -7,6 +7,7 @@ import { VerificationcodeService } from '../verificationcode/verificationcode.se
 
 @Module({
   controllers: [BarbershopController],
-  providers: [BarbershopService, PrismaService, AuthService, VerificationcodeService]
+  providers: [BarbershopService, PrismaService, AuthService, VerificationcodeService],
+  exports: [BarbershopService]
 })
 export class BarbershopModule {}
